@@ -60,13 +60,18 @@ void GUI::config_mode()
 
     label_mode = new QLabel("");
     combo_mode = new QComboBox();
-    combo_mode->addItem("STABILIZE");
-    combo_mode->addItem("ALT_HOLD");
-    combo_mode->addItem("LOITER");
-    combo_mode->addItem("LAND");
-    combo_mode->addItem("RTL");
-    combo_mode->addItem("GUIDED");
-    combo_mode->addItem("AUTO");
+
+    combo_mode->addItem("STABILIZED");
+    combo_mode->addItem("POSCTL");
+    combo_mode->addItem("ALTCTL");
+    combo_mode->addItem("AUTO.LAND");
+    combo_mode->addItem("AUTO.RTL");
+    combo_mode->addItem("OFFBOARD");
+    combo_mode->addItem("AUTO.MISSION");
+    combo_mode->addItem("AUTO.TAKEOFF");
+    combo_mode->addItem("AUTO.LOITER");
+    combo_mode->addItem("ACRO");
+    combo_mode->addItem("MANUAL");
 
     layMode->addWidget(label_mode, 0, 0);
     layMode->addWidget(combo_mode, 0, 1);
@@ -87,8 +92,11 @@ void GUI::config_RC()
     QGridLayout* layRC = new QGridLayout();
     boxRC->setLayout(layRC);
 
-    std::vector<int> rc_maxlimits = share_memory->getRC_maxlimits();
-    std::vector<int> rc_minlimits = share_memory->getRC_minlimits();
+    //std::vector<int> rc_maxlimits = share_memory->getRC_maxlimits();
+    //std::vector<int> rc_minlimits = share_memory->getRC_minlimits();
+
+    std::vector<int> rc_maxlimits (4,2000);
+    std::vector<int> rc_minlimits (4,1000);
 
     channel12 = new RC_Widget(false,
                               rc_maxlimits[0], rc_minlimits[0],

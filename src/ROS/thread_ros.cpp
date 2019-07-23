@@ -73,7 +73,7 @@ void Thread_ROS::updateMode()
         srv.request.base_mode = 0;
         srv.request.custom_mode = share_memory->getModeChange();
         if (cl_mode.call(srv)) {
-            ROS_INFO("Send OK %d Value:", srv.response.success);
+            ROS_INFO("Send OK %d Value:", srv.response.mode_sent);
         } else {
             ROS_ERROR("Failed SetMode");
             return;
